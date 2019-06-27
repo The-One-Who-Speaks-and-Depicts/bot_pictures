@@ -1,5 +1,6 @@
 from model import StyleTransferModel
 from telegram_token import token
+from config import start_message, text_response_message
 import numpy as np
 from PIL import Image
 from io import BytesIO
@@ -54,8 +55,8 @@ if __name__ == '__main__':
     # В реализации большого бота скорее всего будет удобнее использовать Conversation Handler
     # вместо назначения handler'ов таким способом
     updater.dispatcher.add_handler(MessageHandler(Filters.photo, send_prediction_on_photo))
-	updater.dispatcher.add_handler(MessageHandler(Filters.command("Start"), send_message(message.chat.id, 'Привет. Я бедный студент, который учится на художника и которому нужно портфолио. Вам нужны работы, чтобы я перерисовал вашу картинку в стиле одного из величайших художников. Думаю, мы договоримся.'))
-    updater.dispatcher.add_handler(MessageHandler(Filters.text, send_message(message.chat.id, 'Картинку мне давай.'))
+	updater.dispatcher.add_handler(MessageHandler(Filters.command("Start"), send_message(message.chat.id, start_message))
+    updater.dispatcher.add_handler(MessageHandler(Filters.text, send_message(message.chat.id, text_response_message))
 	updater.start_polling()
 	
   
